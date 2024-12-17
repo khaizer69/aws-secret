@@ -27,12 +27,12 @@ jobs:
 
       - name: Get Secret Object
         run: |
-          secret_object=$(aws secretsmanager get-secret-value --secret-id prod/luqman/hobby --query SecretString --output json)
+          secret_object=$(aws secretsmanager get-secret-value --secret-id prod/khai/hobby --query SecretString --output json)
 
           # Parse specific keys from the secret object
-          secret_value_hobby=$(echo "$secret_object" | jq -r '. | fromjson | .luqman_hobby')
-          secret_value_food=$(echo "$secret_object" | jq -r '. | fromjson | .luqman_food')
-          secret_value_loc=$(echo "$secret_object" | jq -r '. | fromjson | .luqman_location')
+          secret_value_hobby=$(echo "$secret_object" | jq -r '. | fromjson | .khai_hobby')
+          secret_value_food=$(echo "$secret_object" | jq -r '. | fromjson | .khai_food')
+          secret_value_loc=$(echo "$secret_object" | jq -r '. | fromjson | .khai_location')
 
           echo "Secret value Hobby is: $secret_value_hobby"
           echo "Secret value Food is: $secret_value_food"
@@ -53,9 +53,9 @@ jobs:
 
       - name: Get parameter object
         run: |
-          phone_value=$(aws ssm get-parameter --name luqman_phone --query Parameter.Value --output text)
-          echo "Luqman's phone model is: $phone_value" 
+          phone_value=$(aws ssm get-parameter --name khai_phone --query Parameter.Value --output text)
+          echo "khai's phone model is: $phone_value" 
 
-          hobby_value=$(aws ssm get-parameter --name luqman_hobby --query Parameter.Value --output text)
-          echo "Luqman's hobby is: $hobby_value" 
+          hobby_value=$(aws ssm get-parameter --name khai_hobby --query Parameter.Value --output text)
+          echo "khai's hobby is: $hobby_value" 
 
